@@ -22,11 +22,13 @@
 #include "Game.h"
 #include "SpriteCodex.h"
 
-Game::Game( MainWindow& wnd )
+Game::Game(MainWindow& wnd)
 	:
-	wnd( wnd ),
-	gfx( wnd )
+	wnd(wnd),
+	gfx(wnd),
+	brd(gfx)
 {
+	snake.InitHead(Vei2(2, 1));
 }
 
 void Game::Go()
@@ -38,11 +40,33 @@ void Game::Go()
 }
 
 void Game::UpdateModel()
-{
-	
+{	
+	const float dt = ft.Mark();
+	if (wnd.kbd.KeyIsPressed(VK_RIGHT))
+	{
+		delta_loc = { 1, 0 };
+	}
+	if (wnd.kbd.KeyIsPressed(VK_LEFT))
+	{
+		delta_loc = { -1, 0 };
+	}
+	if (wnd.kbd.KeyIsPressed(VK_DOWN))
+	{
+		delta_loc = { 0, 1 };
+	}
+	if (wnd.kbd.KeyIsPressed(VK_UP))
+	{
+		delta_loc = { 0, -1 };
+	}
+	accumulator += dt;
+	if (accumulator >= movePeriod)
+	{
+		snake.Move(delta_loc);
+		accumulator -= movePeriod;
+	}
 }
 
 void Game::ComposeFrame()
 {
-
+	snake.Draw(brd);
 }

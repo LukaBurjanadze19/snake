@@ -23,6 +23,9 @@
 #include "Keyboard.h"
 #include "Mouse.h"
 #include "Graphics.h"
+#include "FrameTimer.h"
+#include "Board.h"
+#include "Snake.h"
 
 class Game
 {
@@ -37,4 +40,10 @@ private:
 private:
 	MainWindow& wnd;
 	Graphics gfx;
+	FrameTimer ft;
+	float accumulator = 0.0f;
+	static constexpr float movePeriod = 0.10f;
+	Vei2 delta_loc = { 1, 0 };
+	Board brd;
+	Snake snake;
 };

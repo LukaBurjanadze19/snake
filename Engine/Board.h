@@ -12,7 +12,7 @@ public:
 	int GetHeight() const;
 private:
 	static constexpr int dimension = 20;
-	int width = 10;
-	int height = 10;
+	int width = 40;
+	int height = 30;
 	Graphics& gfx;
 };
